@@ -6,7 +6,8 @@ extends Node3D
 var current_health: int:
 	set(new_value):
 		current_health = new_value
-		label_3d.text = str(new_value)
+		label_3d.text = str(new_value) + "/" + str(max_health)
+		label_3d.modulate = Color.RED.lerp(Color.WHITE, float(current_health) / float(max_health))
 		if current_health < 1:
 			get_tree().reload_current_scene()
 	get:

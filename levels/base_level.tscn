@@ -42,7 +42,7 @@ size = Vector3(100, 2, 100)
 material = SubResource("StandardMaterial3D_r2non")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, -6.64895e-16, 1.47404e-16, 1.47404e-16, 0.422618, 0.906308, -6.64895e-16, -0.906308, 0.422618, 2.08165e-12, 14.5, 9.5)
+transform = Transform3D(1, -6.64895e-16, 1.47403e-16, 2.42442e-16, 0.54981, 0.83529, -6.36424e-16, -0.83529, 0.54981, 2.08165e-12, 14.4525, 10.8699)
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_je2uu")
@@ -101,4 +101,6 @@ loop = false
 speed = 10.0
 
 [node name="Base" parent="Path3D" instance=ExtResource("3_7r3lq")]
-transform = Transform3D(0.999999, -0.0004036, 0.000738692, 0.000405143, 1, -0.000231382, -0.000738477, 0.000231129, 0.999999, 1.99336, 0.00288696, -9.00147)
+transform = Transform3D(0.999999, -0.00040281, 0.000739374, 0.000406172, 1, -0.000231989, -0.000739138, 0.000230982, 0.999999, 1.99336, 0.00288696, -9.00147)
+max_health = 5
+current_health = null

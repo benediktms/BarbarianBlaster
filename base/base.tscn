@@ -7,6 +7,8 @@ albedo_color = Color(0.933333, 0.0901961, 0.196078, 1)
 
 [node name="Base" type="Node3D" groups=["base"]]
 script = ExtResource("1_7tley")
+max_health = 5
+current_health = null
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.08165e-12)
@@ -14,3 +16,10 @@ radius = 2.0
 height = 4.0
 sides = 32
 material = SubResource("StandardMaterial3D_86v2i")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5.5, 2.08165e-12)
+billboard = 1
+text = "starting health"
+font_size = 424
+outline_size = 100

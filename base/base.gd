@@ -2,8 +2,17 @@
 class_name Base
 extends Node3D
 
+@export var max_health := 10
+@export var current_health: int
+
+@onready var label_3d: Label3D = $Label3D
+
 var path: Path3D
 var target_pos: Vector3
+
+func _ready() -> void:
+	label_3d.text = str(max_health)
+	current_health = max_health
 
 func _enter_tree() -> void:
 	path = get_parent() as Path3D
@@ -23,4 +32,8 @@ func _process(_delta: float) -> void:
 		global_position = path.curve.get_point_position(path.curve.point_count - 1)
 
 func take_damage() -> void:
-	print("taking damage")
+	if current_health > 0:
+		current_health -= 1
+		label_3d.text = str(current_health)
+	else:
+		print("game over")

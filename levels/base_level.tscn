@@ -100,7 +100,30 @@ transform = Transform3D(-4.37112e-08, 2.60206e-13, -0.999997, -1.35525e-20, 1, 2
 loop = false
 speed = 10.0
 
+[node name="Enemy2" parent="Path3D" instance=ExtResource("2_0dgvs")]
+transform = Transform3D(-0.0233318, 2.9641e-13, -0.999725, 1.29759e-12, 1, 2.66206e-13, 0.999723, -1.29103e-12, -0.0233319, -17.0215, 6.72149e-13, 6.43832)
+progress = 5.0
+loop = false
+speed = 10.0
+
+[node name="Enemy3" parent="Path3D" instance=ExtResource("2_0dgvs")]
+transform = Transform3D(0.997359, -1.96867e-12, 0.0725649, 1.97386e-12, 1, 1.4896e-20, -0.0725648, 1.43234e-13, 0.997361, -13.7367, 0, 4.16333)
+progress = 10.0
+loop = false
+speed = 10.0
+
+[node name="Enemy4" parent="Path3D" instance=ExtResource("2_0dgvs")]
+transform = Transform3D(0.999992, -1.97386e-12, -0.00251497, 1.97386e-12, 1, -2.14191e-23, 0.00251496, -4.96424e-15, 0.999994, -14.2887, 0, -0.804037)
+progress = 15.0
+loop = false
+speed = 10.0
+
+[node name="Enemy5" parent="Path3D" instance=ExtResource("2_0dgvs")]
+transform = Transform3D(0.0211681, -4.17832e-14, -0.999773, 1.97386e-12, 1, -4.38791e-20, 0.999771, -1.97343e-12, 0.0211681, -10.3868, 0, -2.74592)
+progress = 20.0
+loop = false
+speed = 10.0
+
 [node name="Base" parent="Path3D" instance=ExtResource("3_7r3lq")]
-transform = Transform3D(0.999999, -0.00040281, 0.000739374, 0.000406172, 1, -0.000231989, -0.000739138, 0.000230982, 0.999999, 1.99336, 0.00288696, -9.00147)
+transform = Transform3D(0.999999, -0.000402562, 0.000739535, 0.000406451, 1, -0.000232175, -0.000739307, 0.000230938, 0.999999, 1.99336, 0.00288696, -9.00147)
 max_health = 5
-current_health = null

@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://coecxrwxxsy36"]
+[gd_scene load_steps=9 format=3 uid="uid://coecxrwxxsy36"]
 
 [ext_resource type="MeshLibrary" uid="uid://bpu0omjtkijh5" path="res://mesh_libraries/space_library.tres" id="1_je2uu"]
+[ext_resource type="PackedScene" uid="uid://cdlvoxgqan1vg" path="res://enemy/enemy.tscn" id="2_0dgvs"]
+[ext_resource type="PackedScene" uid="uid://cifvhqfbfjnrq" path="res://base/base.tscn" id="3_7r3lq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8kvit"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,7 +26,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0, 0, 0)
 }
 point_count = 9
-up_vector_enabled = false
 
 [node name="BaseLevel" type="Node3D"]
 
@@ -93,3 +94,11 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
+
+[node name="Enemy" parent="Path3D" instance=ExtResource("2_0dgvs")]
+transform = Transform3D(-4.37112e-08, 2.60206e-13, -0.999997, -1.35525e-20, 1, 2.60205e-13, 0.999995, 2.49265e-20, -4.37113e-08, -22, 2.08165e-12, 6)
+loop = false
+speed = 10.0
+
+[node name="Base" parent="Path3D" instance=ExtResource("3_7r3lq")]
+transform = Transform3D(0.999999, -0.0004036, 0.000738692, 0.000405143, 1, -0.000231382, -0.000738477, 0.000231129, 0.999999, 1.99336, 0.00288696, -9.00147)

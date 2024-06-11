@@ -17,10 +17,15 @@ public partial class RayPickerCamera : Camera3D
     {
         _rayCast.TargetPosition = ProjectLocalRayNormal(_rayCast.GetViewport().GetMousePosition()) * 100;
         _rayCast.ForceRaycastUpdate();
-        if (!_rayCast.IsColliding()) return;
+        if (!_rayCast.IsColliding())
+        {
+            Input.SetDefaultCursorShape();
+        }
 
         var gridMap = CastToGridMap(_rayCast.GetCollider());
         if (gridMap is null) return;
+
+        if (!Input.IsActionPressed("click")) return;
 
         var collisionPoint = gridMap.ToLocal(_rayCast.GetCollisionPoint());
         var cell = gridMap.LocalToMap(collisionPoint);
@@ -29,12 +34,13 @@ public partial class RayPickerCamera : Camera3D
         {
             gridMap.SetCellItem(cell, 1);
         }
-
     }
 
     private static GridMap CastToGridMap(GodotObject target)
     {
-        if (target is GridMap gridMap) return gridMap;
-        return null;
+        if (target is not GridMap gridMap) return null;
+
+        Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
+        return gridMap;
     }
 }

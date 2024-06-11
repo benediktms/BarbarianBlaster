@@ -6,14 +6,14 @@ extends Node3D
 var current_health: int:
 	set(new_value):
 		current_health = new_value
-		label_3d.text = str(new_value) + "/" + str(max_health)
-		label_3d.modulate = Color.RED.lerp(Color.WHITE, float(current_health) / float(max_health))
+		label.text = str(new_value) + "/" + str(max_health)
+		label.modulate = Color.RED.lerp(Color.WHITE, float(current_health) / float(max_health))
 		if current_health < 1:
 			get_tree().reload_current_scene()
 	get:
 		return current_health
 
-@onready var label_3d: Label3D = $Label3D
+@onready var label: Label3D = $Label3D
 
 var path: Path3D
 var target_pos: Vector3

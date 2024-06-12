@@ -22,6 +22,8 @@ public partial class RayPickerCamera : Camera3D
 
     public override void _Process(double delta)
     {
+        base._Process(delta);
+
         _rayCast.TargetPosition = ProjectLocalRayNormal(_rayCast.GetViewport().GetMousePosition()) * 100;
         _rayCast.ForceRaycastUpdate();
         if (!_rayCast.IsColliding())
@@ -29,11 +31,12 @@ public partial class RayPickerCamera : Camera3D
             Input.SetDefaultCursorShape();
         }
 
-        var gridMap = CastToGridMap(_rayCast.GetCollider());
-        if (gridMap is null) return;
+        if (_rayCast.GetCollider() is not GridMap gridMap) return;
+
+        Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
 
         if (!Input.IsActionPressed("click")) return;
-        
+
         var collisionPoint = gridMap.ToLocal(_rayCast.GetCollisionPoint());
         var cell = gridMap.LocalToMap(collisionPoint);
 
@@ -46,13 +49,5 @@ public partial class RayPickerCamera : Camera3D
 
         gridMap.SetCellItem(cell, 1);
         _turretManager.BuildTurret(gridMap.MapToLocal(cell));
-    }
-
-    private static GridMap CastToGridMap(GodotObject target)
-    {
-        if (target is not GridMap gridMap) return null;
-
-        Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
-        return gridMap;
     }
 }

@@ -1,3 +1,4 @@
+using BarbarianBlaster.turret;
 using Godot;
 
 namespace BarbarianBlaster;
@@ -8,10 +9,10 @@ public partial class TurretManager : Node3D
 
     public void BuildTurret(Vector3 turretPosition)
     {
-        var node = _turret.Instantiate();
-        if (node is not Node3D newTurret) return;
+        var turret = _turret.Instantiate<Turret>();
+        if (turret is null) return;
 
-        AddChild(newTurret);
-        newTurret.GlobalPosition = turretPosition;
+        AddChild(turret);
+        turret.GlobalPosition = turretPosition;
     }
 }

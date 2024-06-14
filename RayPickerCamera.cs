@@ -4,9 +4,9 @@ namespace BarbarianBlaster;
 
 public partial class RayPickerCamera : Camera3D
 {
-    [Export] private TurretManager _turretManager;
+    [Export] private TurretManager? _turretManager;
 
-    private RayCast3D _rayCast;
+    private RayCast3D? _rayCast;
 
     public override void _Ready()
     {
@@ -23,6 +23,8 @@ public partial class RayPickerCamera : Camera3D
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        if (_rayCast is null) return;
 
         _rayCast.TargetPosition = ProjectLocalRayNormal(_rayCast.GetViewport().GetMousePosition()) * 100;
         _rayCast.ForceRaycastUpdate();

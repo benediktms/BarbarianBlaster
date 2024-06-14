@@ -6,7 +6,7 @@ public partial class Projectile : Area3D
 {
     private float _speed = 30;
     private Vector3 _direction = Vector3.Forward;
-    private Timer _timer;
+    private Timer? _timer;
 
     public override void _Ready()
     {

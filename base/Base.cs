@@ -4,7 +4,7 @@ namespace BarbarianBlaster;
 
 public partial class Base : Node
 {
-    private Label3D _label;
+    private Label3D? _label;
 
     [Export] private int _maxHealth = 6;
     private int _currentHealth;

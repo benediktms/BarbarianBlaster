@@ -7,7 +7,7 @@ public partial class Enemy : PathFollow3D
 {
     [Export] private float _speed = 5;
 
-    private Base _homeBase;
+    private Base? _homeBase;
 
     public override void _Ready()
     {
@@ -19,7 +19,7 @@ public partial class Enemy : PathFollow3D
         Progress += (float)delta * _speed;
         if (Math.Abs(ProgressRatio - 1.0) < 0.01)
         {
-            _homeBase.TakeDamage();
+            _homeBase?.TakeDamage();
             SetProcess(false);
         }
     }

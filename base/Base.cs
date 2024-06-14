@@ -14,8 +14,12 @@ public partial class Base : Node
         set
         {
             _currentHealth = value;
-            _label.Text = value + "/" + _maxHealth;
-            _label.Modulate = Colors.Red.Lerp(Colors.White, (float)CurrentHealth / _maxHealth);
+
+            if (_label is not null)
+            {
+                _label.Text = $"{value}/{_maxHealth}";
+                _label.Modulate = Colors.Red.Lerp(Colors.White, (float)CurrentHealth / _maxHealth);
+            }
 
             if (CurrentHealth < 1) GetTree().ReloadCurrentScene();
         }

@@ -1,4 +1,3 @@
-using System.Linq;
 using Godot;
 
 namespace BarbarianBlaster.turret;
@@ -6,6 +5,7 @@ namespace BarbarianBlaster.turret;
 public partial class Turret : Node3D
 {
     private Path3D? _path;
+
     public Path3D? Path
     {
         get => _path;
@@ -20,6 +20,8 @@ public partial class Turret : Node3D
     [Export] private PackedScene? _projectile;
     private Timer? _timer;
     private MeshInstance3D? _barrel;
+
+    private Enemy? _target;
 
     public override void _Ready()
     {
@@ -36,13 +38,37 @@ public partial class Turret : Node3D
     {
         base._PhysicsProcess(delta);
 
-        if (Path?.GetChildren().Last() is not Enemy enemy) return;
+        _target = FindBestTarget();
+        if (_target is not null)
+        {
+            LookAt(_target.GlobalPosition, Vector3.Up, true);
+        }
+    }
 
-        LookAt(enemy.GlobalPosition, Vector3.Up, true);
+    private Enemy? FindBestTarget()
+    {
+        Enemy? bestTarget = null;
+        float bestProgress = 0;
+
+        var nodes = Path?.GetChildren();
+        if (nodes is null) return null;
+
+        foreach (var node in nodes)
+        {
+            if (node is not Enemy enemy) continue;
+            if (enemy.Progress > bestProgress)
+            {
+                bestTarget = enemy;
+                bestProgress = enemy.Progress;
+            }
+        }
+
+        return bestTarget;
     }
 
     private void OnTimerTimeout()
     {
+        if (_target is null) return;
         if (_barrel is null) return;
 
         var shot = _projectile?.Instantiate<Projectile>();

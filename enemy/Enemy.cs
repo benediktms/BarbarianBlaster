@@ -9,9 +9,22 @@ public partial class Enemy : PathFollow3D
 
     private Base? _homeBase;
 
+    private int _maxHealth = 3;
+    private int _currentHealth;
+    public int CurrentHealth
+    {
+        get => _currentHealth;
+        set
+        {
+            _currentHealth = value;
+            if (value <= 0) QueueFree();
+        }
+    }
+
     public override void _Ready()
     {
-        _homeBase = GetTree().GetFirstNodeInGroup("base") as Base;
+        _homeBase = (Base)GetTree().GetFirstNodeInGroup("base");
+        CurrentHealth = _maxHealth;
     }
 
     public override void _Process(double delta)

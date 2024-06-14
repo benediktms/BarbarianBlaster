@@ -128,6 +128,7 @@ loop = false
 [node name="Base" parent="." instance=ExtResource("3_7r3lq")]
 transform = Transform3D(1, 6.18297e-06, 5.52349e-06, 7.71923e-06, 1, -5.11042e-06, -4.98653e-06, -1.12312e-06, 1, 2, 2.61479e-10, -9)
 
-[node name="TurretManager" type="Node3D" parent="."]
+[node name="TurretManager" type="Node3D" parent="." node_paths=PackedStringArray("_path")]
 script = ExtResource("5_h1rvm")
 _turret = ExtResource("6_ii346")
+_path = NodePath("../Path3D")

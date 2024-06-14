@@ -23,6 +23,8 @@ public partial class Turret : Node3D
 
     private Enemy? _target;
 
+    private float _turretRange = 10;
+
     public override void _Ready()
     {
         base._Ready();
@@ -56,7 +58,8 @@ public partial class Turret : Node3D
         foreach (var node in nodes)
         {
             if (node is not Enemy enemy) continue;
-            if (enemy.Progress > bestProgress)
+
+            if (enemy.Progress > bestProgress && GlobalPosition.DistanceTo(enemy.GlobalPosition) <= _turretRange)
             {
                 bestTarget = enemy;
                 bestProgress = enemy.Progress;

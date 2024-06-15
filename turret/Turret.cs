@@ -32,6 +32,18 @@ public partial class Turret : Node3D
         }
     }
 
+    private AnimationPlayer? _animationPlayer;
+
+    private AnimationPlayer AnimationPlayer
+    {
+        get
+        {
+            if (_animationPlayer is not null) return _animationPlayer;
+            _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            return _animationPlayer;
+        }
+    }
+
     private Enemy? _target;
 
     private float _turretRange = 10;
@@ -87,5 +99,6 @@ public partial class Turret : Node3D
         AddChild(shot);
         shot.GlobalPosition = Barrel.GlobalPosition;
         shot.Direction = GlobalBasis.Z;
+        AnimationPlayer.Play("fire");
     }
 }

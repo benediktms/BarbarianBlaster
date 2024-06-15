@@ -111,17 +111,17 @@ progress = 5.0
 loop = false
 
 [node name="Enemy3" parent="Path3D" instance=ExtResource("2_0dgvs")]
-transform = Transform3D(0.997359, -1.96867e-12, 0.0725649, 1.97386e-12, 1, 1.4896e-20, -0.0725648, 1.43234e-13, 0.997361, -13.7367, 0, 4.16333)
+transform = Transform3D(0.997359, -1.96867e-12, 0.0725649, 1.97386e-12, 1, 0, -0.0725648, 1.43234e-13, 0.997361, -13.7367, 0, 4.16333)
 progress = 10.0
 loop = false
 
 [node name="Enemy4" parent="Path3D" instance=ExtResource("2_0dgvs")]
-transform = Transform3D(0.999992, -1.97386e-12, -0.00251497, 1.97386e-12, 1, -2.14191e-23, 0.00251497, -4.96424e-15, 0.999994, -14.2887, 0, -0.804037)
+transform = Transform3D(0.999992, -1.97386e-12, -0.00251497, 1.97386e-12, 1, 0, 0.00251497, -4.96424e-15, 0.999994, -14.2887, 0, -0.804037)
 progress = 15.0
 loop = false
 
 [node name="Enemy5" parent="Path3D" instance=ExtResource("2_0dgvs")]
-transform = Transform3D(0.0211681, -4.17832e-14, -0.999773, 1.97386e-12, 1, -4.38791e-20, 0.999771, -1.97343e-12, 0.0211681, -10.3868, 0, -2.74592)
+transform = Transform3D(0.0211681, -4.17832e-14, -0.999773, 1.97386e-12, 1, -4.06575e-20, 0.999771, -1.97343e-12, 0.0211681, -10.3868, 0, -2.74592)
 progress = 20.0
 loop = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdlvoxgqan1vg"]
+[gd_scene load_steps=8 format=3 uid="uid://cdlvoxgqan1vg"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.cs" id="1_ghhbn"]
 
@@ -6,9 +6,50 @@
 radius = 1.0
 height = 3.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmyr3"]
+no_depth_test = true
+shading_mode = 0
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uh2c8"]
 radius = 1.0
 height = 3.0
+
+[sub_resource type="Animation" id="Animation_wf4rg"]
+resource_name = "TakeDamage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageHighlight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_f8106"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageHighlight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7j5i"]
+_data = {
+"RESET": SubResource("Animation_f8106"),
+"TakeDamage": SubResource("Animation_wf4rg")
+}
 
 [node name="Enemy" type="PathFollow3D"]
 transform = Transform3D(-4.37112e-08, 2.60206e-13, -0.999997, -1.35525e-20, 1, 2.60205e-13, 0.999995, 2.49265e-20, -4.37112e-08, 0, 0, 0)
@@ -18,8 +59,19 @@ script = ExtResource("1_ghhbn")
 transform = Transform3D(1, -5.18372e-11, 1.24327e-12, 2.57687e-12, 1, 9.20741e-12, -1.0067e-10, 4.98847e-11, 1, 2.08165e-12, 1.5, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_wdvqh")
 
+[node name="DamageHighlight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -5.18372e-11, 1.2399e-12, 2.57687e-12, 1, 9.20741e-12, -1.00666e-10, 4.98847e-11, 1, 2.08165e-12, 1.5, 2.08165e-12)
+visible = false
+material_override = SubResource("StandardMaterial3D_fmyr3")
+mesh = SubResource("CapsuleMesh_wdvqh")
+
 [node name="EnemyArea3D" type="Area3D" parent="." groups=["enemy_area"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyArea3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.5, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_uh2c8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i7j5i")
+}

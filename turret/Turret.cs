@@ -4,22 +4,33 @@ namespace BarbarianBlaster.turret;
 
 public partial class Turret : Node3D
 {
-    private Path3D? _path;
+    [Export] private PackedScene? _projectile;
 
-    public Path3D? Path
+    public Path3D? Path { get; set; }
+
+    private Timer? _timer;
+
+    private Timer Timer
     {
-        get => _path;
-        set
+        get
         {
-            if (value is null) return;
-
-            _path = value;
+            if (_timer is not null) return _timer;
+            _timer = GetNode<Timer>("Timer");
+            return _timer;
         }
     }
 
-    [Export] private PackedScene? _projectile;
-    private Timer? _timer;
     private MeshInstance3D? _barrel;
+
+    private MeshInstance3D Barrel
+    {
+        get
+        {
+            if (_barrel is not null) return _barrel;
+            _barrel = GetNode<MeshInstance3D>("TurretBase/TurretTop/Barrel");
+            return _barrel;
+        }
+    }
 
     private Enemy? _target;
 
@@ -29,11 +40,8 @@ public partial class Turret : Node3D
     {
         base._Ready();
 
-        _timer = GetNode<Timer>("Timer");
-        _timer.Timeout += OnTimerTimeout;
-        _timer.Start();
-
-        _barrel = GetNode<MeshInstance3D>("TurretBase/TurretTop/Barrel");
+        Timer.Timeout += OnTimerTimeout;
+        Timer.Start();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -72,13 +80,12 @@ public partial class Turret : Node3D
     private void OnTimerTimeout()
     {
         if (_target is null) return;
-        if (_barrel is null) return;
 
         var shot = _projectile?.Instantiate<Projectile>();
         if (shot is null) return;
 
         AddChild(shot);
-        shot.GlobalPosition = _barrel.GlobalPosition;
+        shot.GlobalPosition = Barrel.GlobalPosition;
         shot.Direction = GlobalBasis.Z;
     }
 }

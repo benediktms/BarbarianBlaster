@@ -1,6 +1,6 @@
 using Godot;
 
-namespace BarbarianBlaster.turret;
+namespace BarbarianBlaster;
 
 public partial class Projectile : Area3D
 {

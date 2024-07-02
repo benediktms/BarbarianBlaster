@@ -21,7 +21,7 @@ public partial class Bank : MarginContainer
 
     private int _gold;
 
-    private int Gold
+    public int Gold
     {
         get => _gold;
         set

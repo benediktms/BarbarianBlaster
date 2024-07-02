@@ -31,6 +31,20 @@ public partial class Enemy : PathFollow3D
         }
     }
 
+    private int _reward = 15;
+    private Bank? _bank;
+
+    private Bank Bank
+    {
+        get
+        {
+            if (_bank is not null) return _bank;
+
+            _bank = (Bank)GetTree().GetFirstNodeInGroup("bank");
+            return _bank;
+        }
+    }
+
     private int _maxHealth = 3;
     private int _currentHealth;
 
@@ -46,7 +60,11 @@ public partial class Enemy : PathFollow3D
 
             _currentHealth = value;
 
-            if (value <= 0) QueueFree();
+            if (_currentHealth <= 0)
+            {
+                Bank.Gold += _reward;
+                QueueFree();
+            }
         }
     }
 

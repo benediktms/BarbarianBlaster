@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace BarbarianBlaster;
@@ -8,11 +9,26 @@ public partial class RayPickerCamera : Camera3D
 
     private RayCast3D? _rayCast;
 
+    private int _turretCost = 100;
+    private Bank? _bank;
+
+    private Bank Bank
+    {
+        get
+        {
+            if (_bank is not null) return _bank;
+
+            _bank = (Bank)GetTree().GetFirstNodeInGroup("bank");
+            return _bank;
+        }
+    }
+
     public override void _Ready()
     {
         base._Ready();
 
         _rayCast = GetNode<RayCast3D>("RayCast3D");
+        _ = Bank; // do not lazy load
 
         if (_turretManager is null)
         {
@@ -34,6 +50,7 @@ public partial class RayPickerCamera : Camera3D
         }
 
         if (_rayCast.GetCollider() is not GridMap gridMap) return;
+        if (Bank.Gold < _turretCost) return;
 
         Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
 
@@ -51,5 +68,7 @@ public partial class RayPickerCamera : Camera3D
 
         gridMap.SetCellItem(cell, 1);
         _turretManager.BuildTurret(gridMap.MapToLocal(cell));
+        Bank.Gold -= _turretCost;
+        Input.SetDefaultCursorShape();
     }
 }

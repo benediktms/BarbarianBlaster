@@ -12,29 +12,22 @@ public partial class EnemyPath : Path3D
 
     private Timer? _timer;
 
-    private Timer Timer
-    {
-        get
-        {
-            if (_timer is not null) return _timer;
-            _timer = GetNode<Timer>("Timer");
-            return _timer;
-        }
-    }
-
 
     private void SpawnEnemy()
     {
-        var newEnemy = _enemyScene.Instantiate();
-        AddChild(newEnemy);
+        var enemy = _enemyScene.Instantiate<Enemy>();
+        enemy.MaxHealth = _difficultyManager.EnemyHealth;
+        AddChild(enemy);
     }
 
     public override void _Ready()
     {
         base._Ready();
 
-        Timer.Timeout += SpawnEnemy;
-        Timer.WaitTime = _difficultyManager.SpawnTime;
-        Timer.Start();
+        _timer = GetNode<Timer>("Timer");
+
+        _timer.Timeout += SpawnEnemy;
+        _timer.WaitTime = _difficultyManager.SpawnTime;
+        _timer.Start();
     }
 }

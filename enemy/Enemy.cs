@@ -45,9 +45,11 @@ public partial class Enemy : PathFollow3D
         }
     }
 
-    private int _maxHealth = 3;
+    public int? MaxHealth { get; set; }
+
     private int _currentHealth;
 
+    [Export]
     public int CurrentHealth
     {
         get => _currentHealth;
@@ -70,7 +72,7 @@ public partial class Enemy : PathFollow3D
 
     public override void _Ready()
     {
-        CurrentHealth = _maxHealth;
+        CurrentHealth = MaxHealth ?? 3; // MaxHealth should always be set in EnemyPath
     }
 
     public override void _Process(double delta)

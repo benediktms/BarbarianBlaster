@@ -4,9 +4,10 @@ namespace BarbarianBlaster.DifficultyManager;
 
 public partial class DifficultyManager : Node
 {
-    [Export] private Curve _curve = null!;
+    [Export] private Curve _spawnRateCurve = null!;
+    [Export] private Curve _healthCurve = null!;
 
-    private float _gameLength = 30;
+    private float _gameLength = 40;
     private Timer? _timer;
 
     private Timer Timer
@@ -20,6 +21,7 @@ public partial class DifficultyManager : Node
     }
 
     public float SpawnTime { get; private set; }
+    public int EnemyHealth { get; private set; }
 
     public override void _Ready()
     {
@@ -33,7 +35,7 @@ public partial class DifficultyManager : Node
     {
         base._Process(delta);
 
-        SpawnTime = UpdateSpawnTime();
+        (SpawnTime, EnemyHealth) = UpdateFromCurves();
     }
 
     private float GameProgressRatio()
@@ -43,8 +45,11 @@ public partial class DifficultyManager : Node
         return 1 - ratio;
     }
 
-    private float UpdateSpawnTime()
+    private (float SpawnRateSample, int EnemyHealthSample) UpdateFromCurves()
     {
-        return _curve.Sample(GameProgressRatio());
+        var spawnRate = _spawnRateCurve.Sample(GameProgressRatio());
+        var enemyHealth = (int)(_healthCurve.Sample(GameProgressRatio()));
+
+        return (spawnRate, enemyHealth);
     }
 }

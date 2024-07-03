@@ -10,14 +10,15 @@ public partial class EnemyPath : Path3D
 
     private PackedScene _enemyScene = ResourceLoader.Load<PackedScene>("res://enemy/enemy.tscn");
 
-    private Timer? _timer;
-
+    private Timer _timer = null!;
 
     private void SpawnEnemy()
     {
         var enemy = _enemyScene.Instantiate<Enemy>();
-        enemy.MaxHealth = _difficultyManager.EnemyHealth;
+        enemy.MaxHealth = _difficultyManager.UpdateEnemyHealth();
         AddChild(enemy);
+
+        _timer.WaitTime = _difficultyManager.UpdateSpawnRate();
     }
 
     public override void _Ready()
@@ -26,8 +27,8 @@ public partial class EnemyPath : Path3D
 
         _timer = GetNode<Timer>("Timer");
 
+        _timer.WaitTime = _difficultyManager.SpawnRateCurve.MaxValue;
         _timer.Timeout += SpawnEnemy;
-        _timer.WaitTime = _difficultyManager.SpawnTime;
         _timer.Start();
     }
 }

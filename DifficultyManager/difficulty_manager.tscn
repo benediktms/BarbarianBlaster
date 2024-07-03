@@ -6,7 +6,7 @@
 
 [node name="DifficultyManager" type="Node"]
 script = ExtResource("1_k6jqe")
-_spawnRateCurve = ExtResource("2_t28tt")
+SpawnRateCurve = ExtResource("2_t28tt")
 _healthCurve = ExtResource("3_0svwm")
 
 [node name="Timer" type="Timer" parent="."]

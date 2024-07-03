@@ -30,5 +30,12 @@ public partial class EnemyPath : Path3D
         _timer.WaitTime = _difficultyManager.SpawnRateCurve.MaxValue;
         _timer.Timeout += SpawnEnemy;
         _timer.Start();
+
+        _difficultyManager.StopSpawningEnemies += OnStopSpawningEnemies;
+    }
+
+    private void OnStopSpawningEnemies()
+    {
+        _timer.Stop();
     }
 }

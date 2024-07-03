@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://c7h1i0uc7i4i2"]
+[gd_scene load_steps=3 format=3 uid="uid://c7h1i0uc7i4i2"]
+
+[ext_resource type="Script" path="res://DifficultyManager/DifficultyManager.cs" id="1_k6jqe"]
+
+[sub_resource type="Curve" id="Curve_fdcic"]
+min_value = 0.25
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, -1.75, 0, 1, Vector2(1, 0.25), -1.75, 0.0, 1, 0]
+point_count = 2
 
 [node name="DifficultyManager" type="Node"]
+script = ExtResource("1_k6jqe")
+_curve = SubResource("Curve_fdcic")
+
+[node name="Timer" type="Timer" parent="."]

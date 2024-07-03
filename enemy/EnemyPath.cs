@@ -17,6 +17,7 @@ public partial class EnemyPath : Path3D
         var enemy = _enemyScene.Instantiate<Enemy>();
         enemy.MaxHealth = _difficultyManager.UpdateEnemyHealth();
         AddChild(enemy);
+        enemy.TreeExited += EnemyDefeated;
 
         _timer.WaitTime = _difficultyManager.UpdateSpawnRate();
     }
@@ -26,7 +27,6 @@ public partial class EnemyPath : Path3D
         base._Ready();
 
         _timer = GetNode<Timer>("Timer");
-
         _timer.WaitTime = _difficultyManager.SpawnRateCurve.MaxValue;
         _timer.Timeout += SpawnEnemy;
         _timer.Start();
@@ -37,5 +37,17 @@ public partial class EnemyPath : Path3D
     private void OnStopSpawningEnemies()
     {
         _timer.Stop();
+    }
+
+    private void EnemyDefeated()
+    {
+        if (_timer.IsStopped() is false) return;
+
+        foreach (var child in GetChildren())
+        {
+            if (child is Enemy) return;
+        }
+
+        GD.Print("You won!");
     }
 }

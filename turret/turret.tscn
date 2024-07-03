@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://p6d0p8gv0d5b"]
 
-[ext_resource type="PackedScene" uid="uid://dql2sik1pvo3k" path="res://turret/projectile.tscn" id="1_8r084"]
-[ext_resource type="Script" path="res://turret/Turret.cs" id="1_r61vu"]
+[ext_resource type="PackedScene" uid="uid://dql2sik1pvo3k" path="res://Turret/projectile.tscn" id="1_8r084"]
+[ext_resource type="Script" path="res://Turret/Turret.cs" id="1_r61vu"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3841f"]
 height = 1.0

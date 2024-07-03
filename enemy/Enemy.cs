@@ -41,6 +41,7 @@ public partial class Enemy : PathFollow3D
 
     public override void _Ready()
     {
+        // Engine.TimeScale = 3;
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _homeBase = (Base)GetTree().GetFirstNodeInGroup("base");
         _bank = (Bank)GetTree().GetFirstNodeInGroup("bank");

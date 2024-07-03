@@ -6,7 +6,7 @@ public partial class Base : Node
 {
     private Label3D? _label;
 
-    [Export] private int _maxHealth = 6;
+    [Export] private int _maxHealth = 15;
     private int _currentHealth;
     private int CurrentHealth
     {

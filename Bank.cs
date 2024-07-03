@@ -35,6 +35,6 @@ public partial class Bank : MarginContainer
     {
         base._Ready();
 
-        Gold = 150;
+        Gold = 175;
     }
 }

@@ -1,12 +1,14 @@
 using Godot;
 
 namespace BarbarianBlaster.enemy;
+using UI;
 
 using DifficultyManager;
 
 public partial class EnemyPath : Path3D
 {
     [Export] private DifficultyManager _difficultyManager = null!;
+    [Export] private VictoryLayer _victoryLayer = null!;
 
     private PackedScene _enemyScene = ResourceLoader.Load<PackedScene>("res://enemy/enemy.tscn");
 
@@ -48,6 +50,6 @@ public partial class EnemyPath : Path3D
             if (child is Enemy) return;
         }
 
-        GD.Print("You won!");
+        _victoryLayer.Victory();
     }
 }

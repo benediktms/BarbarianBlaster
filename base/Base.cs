@@ -6,9 +6,12 @@ public partial class Base : Node
 {
     private Label3D? _label;
 
-    [Export] private int _maxHealth = 15;
+    private int _maxHealth = 15;
+    public int MaxHealth { get; set; }
+
     private int _currentHealth;
-    private int CurrentHealth
+
+    public int CurrentHealth
     {
         get => _currentHealth;
         set
@@ -28,7 +31,8 @@ public partial class Base : Node
     public override void _Ready()
     {
         _label = GetNode<Label3D>("Label3D");
-        CurrentHealth = _maxHealth;
+        MaxHealth = _maxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     public void TakeDamage()
